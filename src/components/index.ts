@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import input from "./input/fte-input.vue";
 
-const Components = {
+const Components: any = {
 	"e-input": input
 };
 
