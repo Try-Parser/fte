@@ -33,6 +33,7 @@
            :rules="[]" 
            klass="sample class" 
            type="text">
+	   tip="right"
   </e-input>
 </e-form>
 
