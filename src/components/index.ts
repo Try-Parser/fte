@@ -1,11 +1,11 @@
 import Vue from 'vue';
-import input from "./input/fte-input.vue";
+import FteInput from "./input/fte-input.vue";
 
 const Components: any = {
-	"e-input": input
+	"e-input": FteInput
 };
 
-Object.keys(Components).forEach(name => {
+Object.keys(Components).forEach((name: string) => {
 	Vue.component(name, Components[name])
 });
 
