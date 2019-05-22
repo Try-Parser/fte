@@ -5,17 +5,25 @@
 				<div class="input-container">
 					<input :type="setType" :placeholder="label" :class="klass" :value="value" @input="$emit('input', $event.target.value)">
 					<v-icon class="pos" :class="icon" @click="showTip = !showTip" ref="ticon">{{ icon }}</v-icon>
-					<v-tooltip right color="white" content-class="tooltip-right" v-model="showTip" v-if="hasError && !mobile" >
-						<template v-slot:activator="{ on }">
-							<v-icon></v-icon>
-						</template>
-						<slot name="error">
-							<span class="error mb-375m">
-								<div v-for="msg in setMessage">
-									{{ msg }}
-								</div>
-							</span>
-						</slot>					
+					<v-tooltip 
+						:right  = "tooltip.right"
+						:left   = "tooltip.left"
+						:bottom = "tooltip.bottom"
+						:top    = "tooltip.top"
+						color="white" 
+						:content-class="klasstip" 
+						v-model="showTip" 
+						v-if="hasError && !mobile" >
+							<template v-slot:activator="{ on }">
+								<v-icon></v-icon>
+							</template>
+							<slot name="error">
+								<span class="error mb-375m">
+									<div v-for="msg in setMessage">
+										{{ msg }}
+									</div>
+								</span>
+							</slot>					
 					</v-tooltip>
 				</div>
 				<div v-if="hasError && mobile && showTip">
@@ -37,9 +45,8 @@
 
 	@Component
 	export default class FTEInput extends Vue {
-		@Prop()
-		readonly kv!: string
-
+		@Prop() readonly kv!: string     
+		@Prop({ default: "right" }) readonly tip!: string
 		@Prop({ default: Array }) readonly rules!: any[]
 		@Prop({ default: "text" }) readonly type!: string
 		@Prop({ default: "" }) readonly label!: string
@@ -54,6 +61,15 @@
 		get setMessage() {
 			return this.errorMsgList
 		}
+
+		tooltip: any = {
+			right  : <boolean> false,
+			left   : <boolean> false,
+			bottom : <boolean> false,
+			top    : <boolean> false
+		}
+
+		klasstip: string = "tooltip-right"
 
 		errorMsgList: any = []
 		ic: string = "info"
@@ -114,7 +130,17 @@
 			this.resizedId = setTimeout(this.restartTip, 500)
 		}
 
+		get checkTip() {
+			if(this.tip) {
+				this.tooltip[this.tip] = true;
+				this.klasstip = "tooltip-" + this.tip
+			}
+			return true;
+		}
+
 		mounted() {
+			this.checkTip
+
 			this.$nextTick(() => {
 				window.addEventListener('resize', this.resize)
 			})
@@ -146,7 +172,7 @@
 	}
 
 	.error {
-		color: red;
+		color: red !important;
 		background: white !important;
 		&.mobile {
 			font-size: 12px;
@@ -168,7 +194,6 @@
 				content: "";
 			    position: absolute;
 			    border-style: solid;
-			    border-color: transparent #555 transparent transparent;
 				border-width: 5px;
 			}
 		}
@@ -177,24 +202,28 @@
 			top: 100%;
 			left: 50%;
 			margin-left: -5px;
+		   	border-color: #555 transparent transparent transparent;
 		}
 
 		&-right::after {
 		    top: 50%;
 		    right: 100%;
 		    margin-top: -5px;
+		   	border-color: transparent #555 transparent transparent;
 		}
 
 		&-bottom::after {
 			bottom: 100%;
     		left: 50%;
     		margin-left: -5px;
+    		border-color: transparent transparent #555 transparent;
 		}
 
 		&-left::after {
 			top: 50%;
 		    left: 100%;
 		    margin-top: -5px;
+		   	border-color: transparent transparent transparent #555;
 		}
 	}
 </style>

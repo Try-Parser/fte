@@ -23,7 +23,9 @@
 			elem.forEach((instance: any) => {
 				if(instance.componentOptions.tag == "e-input") {
 					let inst = instance.componentInstance
-					this.obj[inst.kv] = inst.value
+					if(inst.kv) {
+						this.obj[inst.kv] = inst.value
+					}
 					if(inst.hasError) {
 						inst.validate();
 						success = false;

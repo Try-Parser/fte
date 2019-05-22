@@ -4,7 +4,7 @@
 			<v-flex xs12 sm6>
 				<br>
 				<e-form ref="eForm">
-				  	<e-input v-model="test" label="Test" :rules="rule" kv="Kyle" ></e-input>
+				  	<e-input v-model="test" label="Test" :rules="rule" kv="Kyle" tip="right"></e-input>
 				  	<e-input :value="test2" label="Test" :required="true" kv="second" ></e-input>
 				  	<v-btn @click="validate">validate</v-btn>
 				</e-form>

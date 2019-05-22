@@ -23,33 +23,7 @@ body {
 	}
 }
 
-.e {
-    &-table {
-        display: table;
-
-        &-row {
-            display: table-row;
-        }
-
-        &-head {
-            display: table-header-group;
-        }
-
-        &-col {
-            display: table-cell;
-        }
-
-        &-body {
-            display: table-row-group;
-        }
-
-        &-footer {
-            display: table-footer-group;   
-        }
-    }
-}
-
 .error {
-    color: red;
+    color: red !important;
     background: white !important;
 }
