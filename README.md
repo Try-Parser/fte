@@ -1,5 +1,27 @@
 # fte guides
 
+## Installation
+
+```
+ npm i @try-parser/fte -S
+```
+
+### Plugins
+
+```
+ import Vue from 'vue'
+ import Components from '@try-parser/fte'
+ import '@try-parser/fte/dist/fte.css'
+
+ Vue.use(Components)
+```
+
+### main.ts
+
+```
+ import './plugins/fte'
+```
+
 ## Example Code
 
 ```
@@ -10,7 +32,8 @@
            label="Firstname" 
            :rules="[]" 
            klass="sample class" 
-           type="text">
+           type="text"
+	   tip="right">
   </e-input>
 </e-form>
 
