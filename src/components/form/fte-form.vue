@@ -8,32 +8,55 @@
 	</v-layout>
 </template>
 
-
 <script lang="ts">
 	import { Component, Vue } from 'vue-property-decorator'
 
 	@Component
 	export default class FTEForm extends Vue {	
 		obj: any = {}
-
+		success: boolean = true
+		
 		validate() {
-			let success: boolean = true,
-				elem: any = this.$slots.default;
+			this.success = true
+			let elem: any = this.$slots.default;
 
 			elem.forEach((instance: any) => {
-				if(instance.componentOptions.tag == "e-input") {
-					let inst = instance.componentInstance
-					if(inst.kv) {
-						this.obj[inst.kv] = inst.value
-					}
-					if(inst.hasError) {
-						inst.validate();
-						success = false;
-					}
-				}
+				this.recurCheck(instance)				
 			}) 
 
-			return success;
+			return this.success;
+		}
+
+		recurCheck(instance: any) {
+			if(/FTEInput/.test(instance.tag)) {
+				this.executeValidation(instance)
+			} else {
+				let child = instance.children
+
+				if(child && child.length > 0) {
+					child.forEach((ch: any) => {
+						if(/FTEInput/.test(ch.tag)) {
+							this.executeValidation(ch)
+						} else {
+							this.recurCheck(ch)
+						}
+					})
+				}
+			}
+		}
+
+
+		executeValidation(instance: any) {
+			let inst = instance.componentInstance
+			if(inst.kv) {
+				this.obj[inst.kv] = inst.value
+			}
+
+			inst.validate();
+
+			if(inst.hasError) {
+				this.success = false;
+			}
 		}
 
 		gen() {

@@ -5,28 +5,29 @@
 				<div class="input-container">
 					<input :type="setType" :placeholder="label" :class="klass" :value="value" @input="$emit('input', $event.target.value)">
 					<v-icon class="pos" :class="icon" @click="showTip = !showTip" ref="ticon">{{ icon }}</v-icon>
-					<v-tooltip 
-						:right  = "tooltip.right"
-						:left   = "tooltip.left"
-						:bottom = "tooltip.bottom"
-						:top    = "tooltip.top"
-						color="white" 
-						:content-class="klasstip" 
-						v-model="showTip" 
-						v-if="hasError && !mobile" >
-							<template v-slot:activator="{ on }">
-								<v-icon></v-icon>
-							</template>
-							<slot name="error">
-								<span class="error mb-375m">
-									<div v-for="msg in setMessage">
-										{{ msg }}
-									</div>
-								</span>
-							</slot>					
-					</v-tooltip>
+					<div v-if="hasError && !mobile && showTip">
+						<v-tooltip 
+							:right  = "tooltip.right"
+							:left   = "tooltip.left"
+							:bottom = "tooltip.bottom"
+							:top    = "tooltip.top"
+							color="white" 
+							:content-class="klasstip" 
+							v-model="showTip">
+								<template v-slot:activator="{ on }">
+									<v-icon></v-icon>
+								</template>
+								<slot name="error">
+									<span class="error mb-375m">
+										<div v-for="msg in setMessage">
+											{{ msg }}
+										</div>
+									</span>
+								</slot>					
+						</v-tooltip>
+					</div>
 				</div>
-				<div v-if="hasError && mobile && showTip">
+				<div v-show="hasError && mobile && showTip">
 					<slot name="error">
 						<span class="error mb-375m mobile">
 							<div v-for="msg in setMessage">
@@ -73,8 +74,8 @@
 
 		errorMsgList: any = []
 		ic: string = "info"
-		hasError: boolean = true
-		showTip: boolean = true
+		hasError: boolean = false
+		showTip: boolean = false
 		resizedId: any = ''
 		mobile: boolean = false
 
@@ -112,7 +113,7 @@
 		}
 
 		restartTip() {
-			if(window.innerWidth < 600) {
+			if(window.innerWidth < 1024) {
 				this.mobile = true 
 			} else {
 				this.mobile = false
@@ -123,7 +124,7 @@
 		}
 
 		resize(event: any) {
-			if(this.showTip || window.innerWidth < 600) {
+			if(this.showTip || window.innerWidth < 1024) {
 				this.showTip = false
 			}
 			clearTimeout(this.resizedId)
@@ -145,6 +146,8 @@
 				window.addEventListener('resize', this.resize)
 			})
 			this.restartTip()
+
+			console.log(this.hasError, this. mobile, this.showTip)
 		}
 
 		beforeDestroy() {

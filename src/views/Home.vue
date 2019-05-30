@@ -1,12 +1,26 @@
 <template>
 	<v-container>
 		<v-layout row wrap>
-			<v-flex xs12 sm6>
+			<v-flex xs12 sm6 class="h">
 				<br>
 				<e-form ref="eForm">
-				  	<e-input v-model="test" label="Test" :rules="rule" kv="Kyle" tip="right"></e-input>
-				  	<e-input :value="test2" label="Test" :required="true" kv="second" ></e-input>
-				  	<v-btn @click="validate">validate</v-btn>
+					<v-layout row wrap>
+						<v-flex xs12>
+							<v-layout row wrap>
+								<v-flex xs12>
+									<div>
+					  				<e-input v-model="test" label="Test" :rules="rule" kv="Kyle" tip="right"></e-input>
+					  				</div>
+					  			</v-flex>
+					  		</v-layout>
+					  	</v-flex>
+					  	<v-flex xs12>
+					  		<e-input :value="test2" label="Test" :required="true" kv="second" ></e-input>
+					  	</v-flex>
+					  	<v-flex xs12>
+					  		<v-btn @click="validate">validate</v-btn>
+					  	</v-flex>
+				  	</v-layout>
 				</e-form>
 		  	</v-flex>
 	  	</v-layout>
@@ -40,3 +54,10 @@ export default class Home extends Vue {
 	}
 }
 </script>
+
+
+<style lang="scss">
+	.h {
+		height: 2048px;
+	}
+</style>
