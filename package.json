@@ -2,40 +2,45 @@
   "name": "@try-parser/fte",
   "version": "0.2.0",
   "private": false,
+  "author": "tryparser",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build-publish": "vue-cli-service build --target lib --name fte ./src/components/index.ts"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Try-Parser/fte.git"
-  },
   "main": "./dist/fte.common.js",
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
+  ],
   "dependencies": {
-    "core-js": "^2.6.5",
+    "core-js": "^3.1.4",
     "flag-icon-css": "^3.3.0",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
-    "vue-property-decorator": "^8.1.0",
-    "vue-router": "^3.0.3",
-    "vuetify": "^1.5.5",
+    "vue-property-decorator": "^8.2.1",
+    "vue-router": "^3.1.1",
+    "vuetify": "^2.0.5",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.7.0",
-    "@vue/cli-plugin-pwa": "^3.7.0",
-    "@vue/cli-plugin-typescript": "^3.7.0",
-    "@vue/cli-service": "^3.7.0",
+    "@vue/cli-plugin-babel": "^3.10.0",
+    "@vue/cli-plugin-pwa": "^3.10.0",
+    "@vue/cli-plugin-typescript": "^3.10.0",
+    "@vue/cli-service": "^3.10.0",
     "node-sass": "^4.9.0",
+    "sass": "^1.17.4",
     "sass-loader": "^7.1.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
-    "typescript": "^3.4.3",
-    "vue-cli-plugin-vuetify": "^0.5.0",
+    "typescript": "^3.5.3",
+    "vue-cli-plugin-vuetify": "^0.6.1",
     "vue-template-compiler": "^2.5.21",
-    "vuetify-loader": "^1.0.5"
+    "vuetify-loader": "^1.3.0"
   },
   "postcss": {
     "plugins": {
@@ -46,13 +51,9 @@
     "> 1%",
     "last 2 versions"
   ],
-  "files": [
-    "dist/*",
-    "src/*",
-    "public/*",
-    "*.json",
-    "*.js"
-  ],
-  "author": "tryparser",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Try-Parser/fte.git"
+  }
 }

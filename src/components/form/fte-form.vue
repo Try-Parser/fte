@@ -1,11 +1,9 @@
 <template>
-	<v-layout row wrap>
-		<v-flex xs12>
-			<form>
-				<slot></slot>
-			</form>
-		</v-flex>
-	</v-layout>
+	<v-container fluid>
+		<form>
+			<slot></slot>
+		</form>
+	</v-container>
 </template>
 
 <script lang="ts">

@@ -1,44 +1,43 @@
 <template>
-	<v-layout row wrap>
-		<v-flex xs12>
-			<slot name="input">
-				<div class="input-container">
-					<input :type="setType" :placeholder="label" :class="klass" :value="value" @input="$emit('input', $event.target.value)">
-					<v-icon class="pos" :class="icon" @click="showTip = !showTip" ref="ticon">{{ icon }}</v-icon>
-					<div v-if="hasError && !mobile && showTip">
-						<v-tooltip 
-							:right  = "tooltip.right"
-							:left   = "tooltip.left"
-							:bottom = "tooltip.bottom"
-							:top    = "tooltip.top"
-							color="white" 
-							:content-class="klasstip" 
-							v-model="showTip">
-								<template v-slot:activator="{ on }">
-									<v-icon></v-icon>
-								</template>
-								<slot name="error">
-									<span class="error mb-375m">
-										<div v-for="msg in setMessage">
-											{{ msg }}
-										</div>
-									</span>
-								</slot>					
-						</v-tooltip>
-					</div>
+	<div>
+		<slot name="input">
+			<div class="input-container">
+				<input :type="setType" :placeholder="label" :class="klass" :value="value" @input="$emit('input', $event.target.value)">
+				<v-icon class="pos" :color="icon" @click="showTip = !showTip" ref="ticon">{{ icon }}</v-icon>
+				<div v-if="hasError && !mobile && showTip">
+					<v-tooltip 
+						:right  = "tooltip.right"
+						:left   = "tooltip.left"
+						:bottom = "tooltip.bottom"
+						:top    = "tooltip.top"
+						color="white" 
+						:content-class="klasstip" 
+						v-model="showTip"
+						eager>
+							<template v-slot:activator="{ on }">
+								<v-icon></v-icon>
+							</template>
+							<slot name="error">
+								<span class="error mb-375m">
+									<div v-for="msg in setMessage">
+										{{ msg }}
+									</div>
+								</span>
+							</slot>					
+					</v-tooltip>
 				</div>
-				<div v-show="hasError && mobile && showTip">
-					<slot name="error">
-						<span class="error mb-375m mobile">
-							<div v-for="msg in setMessage">
-								{{ msg }}
-							</div>
-						</span>
-					</slot>
-				</div>
-			</slot>
-		</v-flex>
-	</v-layout>
+			</div>
+			<div v-show="hasError && mobile && showTip">
+				<slot name="error">
+					<span class="error mb-375m mobile">
+						<div v-for="msg in setMessage">
+							{{ msg }}
+						</div>
+					</span>
+				</slot>
+			</div>
+		</slot>
+	</div>
 </template>
 
 <script lang="ts">
@@ -146,8 +145,6 @@
 				window.addEventListener('resize', this.resize)
 			})
 			this.restartTip()
-
-			console.log(this.hasError, this. mobile, this.showTip)
 		}
 
 		beforeDestroy() {
@@ -161,7 +158,7 @@
 
 	.input {
 		&-container {
-  			display: -ms-flexbox; /* IE10 */
+  			display: -ms-flexbox; 
   			display: flex;			
   			width: 100%;
   			position: relative;
