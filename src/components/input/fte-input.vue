@@ -2,9 +2,10 @@
 	<div>
 		<slot name="input">
 			<div class="input-container">
-				<input :type="setType" :placeholder="label" :class="klass" :value="value" @input="$emit('input', $event.target.value)">
-				<v-icon class="pos" :color="icon" @click="showTip = !showTip" ref="ticon">{{ icon }}</v-icon>
-				<div v-if="hasError && !mobile && showTip">
+				<textarea v-if="type === 'textarea'" :rows="row" class="ta" :class="klass" :cols="col" :value="value" @input="$emit('input', $event.target.value)"></textarea>
+				<input v-else :type="setType" :placeholder="label" :class="klass" :value="value" @input="$emit('input', $event.target.value)">
+				<v-icon class="pos" :class="getClassIcon" :color="icon" @click="showTip = !showTip" ref="ticon">{{ icon }}</v-icon>
+				<div v-if="!mobileOnly && hasError && !mobile && showTip">
 					<v-tooltip 
 						:right  = "tooltip.right"
 						:left   = "tooltip.left"
@@ -27,7 +28,7 @@
 					</v-tooltip>
 				</div>
 			</div>
-			<div v-show="hasError && mobile && showTip">
+			<div v-show="mobileOnly || (hasError && mobile && showTip)">
 				<slot name="error">
 					<span class="error mb-375m mobile">
 						<div v-for="msg in setMessage">
@@ -45,6 +46,10 @@
 
 	@Component
 	export default class FTEInput extends Vue {
+		@Prop({ default: "4" }) readonly row!: string
+		@Prop({ default: "50" }) readonly col!: string
+
+		@Prop({ default: false }) readonly mobileOnly!: boolean
 		@Prop() readonly kv!: string     
 		@Prop({ default: "right" }) readonly tip!: string
 		@Prop({ default: Array }) readonly rules!: any[]
@@ -77,9 +82,15 @@
 		showTip: boolean = false
 		resizedId: any = ''
 		mobile: boolean = false
+		txa: string = ''
 
 		get icon() {
 			return (this.rules.length) ? this.ic: "";
+		}
+
+		get getClassIcon() {
+			console.log(this.type)
+			return (this.type == "textarea") ? 'txa' : '';
 		}
 
 		validate() {
@@ -169,6 +180,10 @@
 	    position: absolute;
 	    right: 1%;
 	    top: 15%;
+
+	    &.txa {
+	    	top: 5px !important;
+	    }
 	}
 
 	.error {

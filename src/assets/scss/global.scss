@@ -15,6 +15,10 @@ body {
     margin-bottom: 0.375rem;
     font-size: initial;		
     outline: none;
+    
+    &.ta {
+        height: 100%;
+    }
 }
 
 .m {

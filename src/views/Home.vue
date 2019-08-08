@@ -4,8 +4,9 @@
 			<v-flex xs12 sm6 class="h">
 				<br>
 				<e-form ref="eForm">
-	  				<e-input v-model="test" label="Test" :rules="rule" kv="Kyle" tip="right"></e-input>
-			  		<e-input :value="test2" label="Test" :required="true" kv="second" ></e-input>
+	  				<e-input v-model="test" label="Test" :rules="rule" kv="Kyle" tip="right" mobileOnly="true"></e-input>
+			  		<e-input :value="test2" label="Test" :rules="rule" kv="second" ></e-input>
+			  		<e-input type="textarea" value="test2" label="Test" :rules="rule" kv="second" ></e-input>
 		  			<v-btn @click="validate">validate</v-btn>
 				</e-form>
 		  	</v-flex>			
@@ -38,12 +39,14 @@ import eForm from '@/components/form/fte-form.vue';
 export default class Home extends Vue {
 	test: string = ""
 	test2: string = "aw"
+	textarea: string = ""
 	rule = [
 		(v:any) => !!v || 'Field is required',
 		(v:any) => (v && v.length <= 100) || 'Name must be less than 100 characters',
 		(v:any) => /.+@.+/.test(v) || 'Dapat email'
 	]
 	validate() {
+		console.log(this.textarea)
 		console.log((this.$refs.eForm as any).validate())
 		console.log((this.$refs.eForm as any).gen())
 	}
