@@ -177,7 +177,7 @@
 
 	.pos {
 	    position: absolute;
-	    right: 1%;
+	    right: 5px;
 	    top: 15%;
 
 	    &.txa {
@@ -197,8 +197,8 @@
 		background: white !important;
 	}
 
-	.check_circle {
-		color: green !important;
+	.check_circle--text {
+		color: teal !important;
 		background: white !important;
 	}
 
