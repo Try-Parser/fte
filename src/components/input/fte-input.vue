@@ -89,7 +89,6 @@
 		}
 
 		get getClassIcon() {
-			console.log(this.type)
 			return (this.type == "textarea") ? 'txa' : '';
 		}
 

@@ -4,15 +4,10 @@
 			<div class="input-container">
 				<div @click="pickedFile" class="e-field file text-center" v-show="imgUrl">
 					<v-progress-circular indeterminate color="primary" v-if="load"/>
-					<div v-else>
-						{{ filename }}   
-						<v-icon class="pos" dark>remove</v-icon>
-						<v-divider class="my-2"></v-divider>
-						<img class="img" :src="imgUrl"/>
-	          		</div>
+					<img class="img" :class="imageClass" :src="imgUrl" v-else/>
 	          	</div>
 				<div class="dropbox e-field file" v-show="imgUrl == ''">
-					<input type="file" accept="image/*" ref="image" class="input-file" @change="onFilePicked" />
+					<input type="file" :accept="accept" ref="image" class="input-file" @change="onFilePicked" />
 					<p>
 						<v-icon x-large> {{ icon }} </v-icon>
 						<br> {{ label }}
@@ -32,6 +27,8 @@
 		@Prop({ default: "Upload file" }) readonly label!: string
 		@Prop({ default: "cloud_download" }) readonly icon!: string
 		@Prop({ default: require('@/assets/img/folder.png') }) readonly image!: string
+		@Prop({ default: "" }) readonly accept!: string
+		@Prop({ default: "" }) readonly imageClass!: string
 
 		imgUrl: any = ""
 		file: any = null
@@ -71,7 +68,6 @@
 				this.imgUrl = e.target.result
 			else
 				this.imgUrl = this.image
-			console.log(this.file)
 			this.filename = this.file.name
 			this.$emit("input", this.file)
 		}

@@ -7,7 +7,7 @@
 	  				<e-input v-model="test" label="Test" :rules="rule" kv="Kyle" tip="right" mobileOnly="true"></e-input>
 			  		<e-input :value="test2" label="Test" :rules="rule" kv="second" ></e-input>
 			  		<e-input type="textarea" value="test2" label="Test" :rules="rule" kv="second" ></e-input>
-		  			<e-file v-model="samplefile" ></e-file>
+		  			<e-file v-model="samplefile" accept="image/*"></e-file>
 		  			<v-btn @click="validate">validate</v-btn>
 				</e-form>
 		  	</v-flex>			
