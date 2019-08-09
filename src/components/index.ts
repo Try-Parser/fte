@@ -1,14 +1,12 @@
 import Vue from 'vue';
-import FteInput from "./input/fte-input.vue";
-import FteForm from "./form/fte-form.vue";
-import Flag from "./fragments/flag.vue";
 
 import 'flag-icon-css/css/flag-icon.css';
 
 const Components: any = {
-	"e-input": FteInput,
-	"e-form": FteForm,
-	"e-flag": Flag
+	"e-input": () => import('@/input/fte-input.vue'),
+	"e-form": () => import('@/form/fte-form.vue'),
+	"e-flag": () => import('@/fragments/flag.vue'),
+	"e-file": () => import('@/input/fte-file.vue')
 };
 
 Object.keys(Components).forEach((name: string) => {

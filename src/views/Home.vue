@@ -7,6 +7,7 @@
 	  				<e-input v-model="test" label="Test" :rules="rule" kv="Kyle" tip="right" mobileOnly="true"></e-input>
 			  		<e-input :value="test2" label="Test" :rules="rule" kv="second" ></e-input>
 			  		<e-input type="textarea" value="test2" label="Test" :rules="rule" kv="second" ></e-input>
+		  			<e-file v-model="samplefile" ></e-file>
 		  			<v-btn @click="validate">validate</v-btn>
 				</e-form>
 		  	</v-flex>			
@@ -33,20 +34,25 @@ import eForm from '@/components/form/fte-form.vue';
 @Component({
 	components: {
 		"e-input": eInput,
-		"e-form": eForm
+		"e-form": eForm,
+		"e-file":  () => import('@/components/input/fte-file.vue')
 	}
 })
 export default class Home extends Vue {
 	test: string = ""
 	test2: string = "aw"
 	textarea: string = ""
+	samplefile: any = null
 	rule = [
 		(v:any) => !!v || 'Field is required',
 		(v:any) => (v && v.length <= 100) || 'Name must be less than 100 characters',
 		(v:any) => /.+@.+/.test(v) || 'Dapat email'
 	]
+
+
 	validate() {
 		console.log(this.textarea)
+		console.log(this.samplefile)
 		console.log((this.$refs.eForm as any).validate())
 		console.log((this.$refs.eForm as any).gen())
 	}
