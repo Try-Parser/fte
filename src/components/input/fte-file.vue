@@ -82,16 +82,6 @@
 	@import '@/assets/scss/global.scss';
 
 	.input-container {
-		position: relative;
-		.pos {
-		    position: absolute;
-		    right: 1%;
-		    top: 15%;
-
-		    &.txa {
-		    	top: 5px !important;
-		    }
-		}
 
 		.remove {
 			border-radius: 28px;
